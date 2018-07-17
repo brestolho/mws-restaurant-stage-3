@@ -1,0 +1,29 @@
+{
+  "name": "Restaurant-Reviews",
+  "private": true,
+  "version": "0.0.0",
+  "description": "a Sails application",
+  "keywords": [],
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-ignore": "^2.0.2",
+    "gulp-minify": "^2.1.0",
+    "gulp-rename": "^1.2.3",
+    "gulp-sass": "^4.0.1",
+    "gulp-uglify": "^3.0.0"
+  },
+  "scripts": {
+    "debug": "node debug app.js",
+    "start": "node app.js"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/brandy/Restaurant-Reviews.git"
+  },
+  "author": "Brandy Lee Camacho",
+  "linkedIn": "https://www.linkedin.com/in/brandycamacho/",
+  "email": "brandy@udacity.com"
+}

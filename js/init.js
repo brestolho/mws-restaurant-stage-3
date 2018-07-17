@@ -25,12 +25,21 @@
     }
 
     //create or update db
-    var dbPromise = idb.open('restaurantsAppDB', 1, function(upgradeDb) {
+    var dbPromise = idb.open('restaurantsAppDB', 2, function(upgradeDb) {
         console.log('making a new object store');
         if (!upgradeDb.objectStoreNames.contains('restaurants')) {
             upgradeDb.createObjectStore('restaurants', {keyPath: 'id'});
         }
+        if (!upgradeDb.objectStoreNames.contains('reviews')) {
+            var reviewsTbl = upgradeDb.createObjectStore('reviews', {keyPath: 'id'});
+            reviewsTbl.createIndex('restaurant_id', 'restaurant_id');
+        }
+        if (!upgradeDb.objectStoreNames.contains('reviewsOff')) {
+          upgradeDb.createObjectStore('reviewsOffline', { keyPath: 'updatedAt' });
+        }
     });
+
+
 
     //import all restaurants to db
     dbPromise.then(db => {
@@ -39,6 +48,17 @@
                 var tx = db.transaction('restaurants', 'readwrite');
                 var keyValStore = tx.objectStore('restaurants');
                 keyValStore.put(rest);
+            })
+        })
+    });
+
+    //import all reviews to db
+    dbPromise.then(db => {
+        DBHelper.fetchReviewsFromServer((error, reviews) => {
+            reviews.forEach(function(rest){
+                var tx = db.transaction('reviews', 'readwrite');
+                var keyVal = tx.objectStore('reviews');
+                keyVal.put(rest);
             })
         })
     });

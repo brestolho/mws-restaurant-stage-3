@@ -10,7 +10,7 @@ class DBHelper {
   static get DATABASE_URL() {
     const port = 1337 // Change this to your server port
     //return `http://localhost:${port}/data/restaurants.json`;
-    return `http://localhost:${port}/restaurants/`;
+    return `http://localhost:${port}/`;
   }
 
 
@@ -19,7 +19,7 @@ class DBHelper {
    * Fetch all restaurants.
    */
   static fetchRestaurantsFromServer(callback) {
-    fetch( DBHelper.DATABASE_URL, {headers: {}} )
+    fetch( DBHelper.DATABASE_URL + `restaurants/`, {headers: {}} )
       .then(response => response.json())
       .then(restaurants => callback(null, restaurants) )
       .catch(error => {
@@ -28,13 +28,27 @@ class DBHelper {
       });
   }
 
+  /**
+   * Fetch all reviews.
+   */
+  static fetchReviewsFromServer(callback) {
+    fetch( DBHelper.DATABASE_URL + `reviews/`, {headers: {}} )
+      .then(response => response.json())
+      .then(reviews => callback(null, reviews) )
+      .catch(error => {
+        console.error("Fetch return error");
+        callback(error, null);
+      });
+  }
+
+
   static fetchRestaurants(callback) {
     var dbPromise = idb.open('restaurantsAppDB');
 
     dbPromise.then(function(db) {
       var tx = db.transaction('restaurants', 'readonly');
       var store = tx.objectStore('restaurants');
-      console.log(store.getAll());
+      //console.log(store.getAll());
       return store.getAll();
     }).then(restaurants => callback(null, restaurants));
   }
@@ -177,5 +191,58 @@ class DBHelper {
     );
     return marker;
   }
+
+
+  static fetchReviews(callback) {
+    var dbPromise = idb.open('restaurantsAppDB');
+
+    dbPromise.then(function(db) {
+      var tx = db.transaction('reviews', 'readonly');
+      var reviews = tx.objectStore('reviews');
+      
+      return reviews;//.getAll();
+    }).then(reviews => callback(null, reviews));
+  }
+
+
+  static fetchAllReviews(callback) {
+    DBHelper.fetchReviews((error, reviews) => {
+
+      if (error) {
+        callback(error, null);
+      } else {
+        
+        const list = reviews.getAll();
+        if (list) {
+          callback(null, list);
+        } else { 
+          callback('Reviews not found', null);
+        }
+      }
+    });
+  }
+
+  /**
+   * Fetch reviews by restaurant ID.
+   */
+  static fetchReviewsByRestaurantId(id, callback) {
+    // fetch all reviews with proper error handling.
+    DBHelper.fetchReviews((error, reviews) => {
+
+      if (error) {
+        callback(error, null);
+      } else {
+        
+        const list = reviews.index('restaurant_id').getAll(id);    
+        if (list) {
+          callback(null, list);
+        } else { 
+          callback('Reviews not found for that restaurant_id does not exist', null);
+        }
+      }
+    });
+  }
+
+
 
 }

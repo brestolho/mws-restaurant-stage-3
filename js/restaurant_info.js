@@ -67,8 +67,10 @@ fillRestaurantHTML = (restaurant = self.restaurant) => {
   if (restaurant.operating_hours) {
     fillRestaurantHoursHTML();
   }
+
+  console.log("fill restaurant");
   // fill reviews
-  fillReviewsHTML();
+  fetchReviewsFromURL();
 }
 
 /**
@@ -91,26 +93,58 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
   }
 }
 
+
+
+
+/**
+ * Fetch Reviews on first load
+ * **/
+
+fetchReviewsFromURL = () => {
+    const id = parseInt(getParameterByName('id'));
+
+    if (!id) {
+        console.log('No Id in URL to fetch Reviews');
+        return;
+    }
+    
+    DBHelper.fetchReviewsByRestaurantId(id, (err, reviews) => {
+      self.reviews = reviews;
+      if (err || !reviews) {
+          console.log('REVIEWS: fetching error ', err);
+          return;
+      }
+      fillReviewsHTML();
+    });
+}
+
+
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
-  const container = document.getElementById('reviews-container');
-  const title = document.createElement('h2');
-  title.innerHTML = 'Reviews';
-  container.appendChild(title);
+fillReviewsHTML = (reviews = self.reviews) => {
 
-  if (!reviews) {
-    const noReviews = document.createElement('p');
-    noReviews.innerHTML = 'No reviews yet!';
-    container.appendChild(noReviews);
-    return;
-  }
-  const ul = document.getElementById('reviews-list');
-  reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
+  reviews.then(reviews => { 
+    const container = document.getElementById('reviews-container');
+    const title = document.createElement('h2');
+    title.innerHTML = 'Reviews';
+    container.appendChild(title);
+    console.log(reviews);
+
+    if (!reviews) {
+      const noReviews = document.createElement('p');
+      noReviews.innerHTML = 'No reviews yet!';
+      container.appendChild(noReviews);
+      return;
+    }
+    const ul = document.getElementById('reviews-list');
+
+    reviews.forEach(review => {
+      ul.appendChild(createReviewHTML(review));
+    });
+    container.appendChild(ul);
   });
-  container.appendChild(ul);
+  
 }
 
 /**
@@ -137,6 +171,7 @@ createReviewHTML = (review) => {
 
   return li;
 }
+
 
 /**
  * Add restaurant name to the breadcrumb navigation menu
