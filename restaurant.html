@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="content-language" content="en" />
+
+  <meta name="theme-color" content="#6290c3" />
+
+  <meta name="keywords" content="restaurants, where to eat, arround me, portuguese food, ">
+  <meta name="description" content="Review restaurants app is the best app ever build. Thanks to google and udacity we are learning alot.">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+  <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <style>
+    body,td,th,p{font-family: Arial, Helvetica, sans-serif;font-size: 10pt;color: #333;line-height: 1.5;}
+    body {background-color: #fdfdfd;margin: 0;position:relative;}
+    header h1 {width: 100%;height: 80px;background-color: #252831;text-align:center;display: flex;flex-wrap: nowrap;align-items: center;margin: auto;}
+    header h1 a {color: #fff;font-size: 12pt;font-weight: 200;letter-spacing: 10px;text-transform: uppercase;margin: 0 auto;}
+    #map {height: 400px;width: 100%;background-color: #ccc;}
+    #restaurants-list {background-color: #f3f3f3;list-style: outside none none;margin: 0;padding: 30px 15px 60px;text-align: center;display: flex;flex-wrap: wrap;justify-content: center;}
+    #restaurants-list li {position:relative;background-color: #fff;border: none;margin: 15px;min-height: 380px;padding: 0;text-align: left;width: 270px;display: flex;justify-content: space-between;flex-direction: column;}
+    #restaurants-list .restaurant-img {background-color: #ccc;display: block;margin: 0;max-width: 100%;min-height: 208px;min-width: 100%;}
+  </style>
+  <!--<link rel="stylesheet" href="dist/css/styles.min.css" media="(min-width: 300px)" />-->
+  <link rel="preload" as="style" href="dist/css/styles.min.css" onload="this.rel='stylesheet'">
+  <link rel="manifest" href="manifest.json" />
+  
+  <title>Restaurant Info</title>
+
+</head>
+
+<body class="inside">
+  <!-- Beginning header -->
+  <header>
+    <!-- Beginning nav -->
+    <h1><a href="/" title="View home page">Restaurant Reviews</a></h1>
+    <!-- Beginning breadcrumb -->
+    <nav aria-label="Breadcrumb">
+      <ul id="breadcrumb" role="navigation">
+        <li><a href="/">Home</a></li>
+      </ul>
+    </nav>
+    <!-- End breadcrumb -->
+    <!-- End nav -->
+  </header>
+
+  <!-- End header -->
+
+  <!-- Beginning main -->
+  <main id="maincontent">
+    <!-- Beginning map -->
+    <section id="map-container">
+      <div id="map" role="application" aria-label="Google Maps" aria-hidden="true" tabindex="-1"></div>
+    </section>
+    <!-- End map -->
+    <!-- Beginning restaurant -->
+    <section id="restaurant-container">
+      <h1 id="restaurant-name" aria-label="restaurant name" tabindex="0"></h1>
+      <img id="restaurant-img">
+      <p id="restaurant-cuisine" aria-label="restaurant cousing type"></p>
+      <p id="restaurant-address" aria-label="restaurant address"></p>
+      <table id="restaurant-hours" aria-label="restaurant working hours"></table>
+    </section>
+    <!-- end restaurant -->
+    <!-- Beginning reviews -->
+    <section id="reviews-container">
+      <ul id="reviews-list"></ul>
+    </section>
+    <!-- End reviews -->
+  </main>
+  <!-- End main -->
+
+  <!-- Beginning footer -->
+  <footer id="footer">
+    Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.
+  </footer>
+  <!-- End footer -->
+
+  <!-- Beginning scripts -->
+  <!-- Database helpers -->
+  <script type="application/javascript" charset="utf-8" src="dist/js/idb.min.js"></script>
+  <script type="application/javascript" charset="utf-8" src="dist/js/init.min.js"></script>
+  <script type="application/javascript" charset="utf-8" src="dist/js/dbhelper.min.js"></script>
+  <!-- Main javascript file -->
+  <script type="text/javascript" src="dist/js/restaurant_info.min.js"></script>
+  <!-- Google Maps -->
+  <script async defer type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC32BslpUZzuiDJ0-oFpM1FSLEttyBtHds&libraries=places&callback=initMap"></script>
+  <!-- End scripts -->
+
+</body>
+
+</html>
