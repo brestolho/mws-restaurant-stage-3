@@ -158,7 +158,15 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('span');
-  date.innerHTML = review.date;
+
+  let dateFormat = new Date(review.createdAt);
+  if(dateFormat){
+    let iso = dateFormat.toISOString().match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})/);  
+    date.innerHTML = `${iso[3]}/${iso[2]}/${iso[1]} ${iso[4]}:${iso[5]}:${iso[6]}`;
+  }else{
+    date.innerHTML = `-`;
+  }
+  
   name.appendChild(date);
 
   const rating = document.createElement('em');
