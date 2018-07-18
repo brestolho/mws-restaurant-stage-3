@@ -44,6 +44,9 @@
     //import all restaurants to db
     dbPromise.then(db => {
         DBHelper.fetchRestaurantsFromServer((error, restaurants) => {
+            
+            //console.log("fetch restaurants", restaurants);
+
             restaurants.forEach(function(rest){
                 var tx = db.transaction('restaurants', 'readwrite');
                 var keyValStore = tx.objectStore('restaurants');
@@ -55,10 +58,13 @@
     //import all reviews to db
     dbPromise.then(db => {
         DBHelper.fetchReviewsFromServer((error, reviews) => {
+
+            //console.log("fetch reviews", reviews);
+
             reviews.forEach(function(rest){
                 var tx = db.transaction('reviews', 'readwrite');
-                var keyVal = tx.objectStore('reviews');
-                keyVal.put(rest);
+                var keyValStore = tx.objectStore('reviews');
+                keyValStore.put(rest);
             })
         })
     });

@@ -40,6 +40,7 @@ self.addEventListener('install', event => {
   );
 });
 
+
 // The activate handler takes care of cleaning up old caches.
 self.addEventListener('activate', event => {
   const currentCaches = [PRECACHE, RUNTIME];
@@ -53,6 +54,8 @@ self.addEventListener('activate', event => {
     }).then(() => self.clients.claim())
   );
 });
+
+
 
 // The fetch handler serves responses for same-origin resources from a cache.
 // If no response is found, it populates the runtime cache with the response
@@ -98,6 +101,12 @@ self.addEventListener('fetch', event => {
   }
 });
 
+
+/*self.addEventListener('sync', function (event) {
+  if (event.tag === 'review-sync') {
+    event.waitUntil(IDBHelper.syncOfflineReviews());
+  }
+});*/
 
 /*function servePhoto(request) {
   var storageUrl = request.url.replace(/-\d+px\.jpg$/, '');

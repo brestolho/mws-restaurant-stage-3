@@ -16,7 +16,7 @@ class DBHelper {
 
 
   /**
-   * Fetch all restaurants.
+   * Fetch all restaurants from server.
    */
   static fetchRestaurantsFromServer(callback) {
     fetch( DBHelper.DATABASE_URL + `restaurants/`, {headers: {}} )
@@ -29,9 +29,10 @@ class DBHelper {
   }
 
   /**
-   * Fetch all reviews.
+   * Fetch all reviews from server.
    */
   static fetchReviewsFromServer(callback) {
+    console.log(DBHelper.DATABASE_URL + `reviews/`);
     fetch( DBHelper.DATABASE_URL + `reviews/`, {headers: {}} )
       .then(response => response.json())
       .then(reviews => callback(null, reviews) )
@@ -45,13 +46,26 @@ class DBHelper {
   static fetchRestaurants(callback) {
     var dbPromise = idb.open('restaurantsAppDB');
 
-    dbPromise.then(function(db) {
+    return dbPromise.then(function(db) {
       var tx = db.transaction('restaurants', 'readonly');
       var store = tx.objectStore('restaurants');
-      //console.log(store.getAll());
+
       return store.getAll();
     }).then(restaurants => callback(null, restaurants));
   }
+
+  /*static fetchRestaurants(callback) {
+    var dbPromise = idb.open('restaurantsAppDB');
+
+    dbPromise.then(db => {
+      return db.transaction('restaurants')
+        .objectStore('restaurants').getAll();
+    })
+    .then(restaurants => { return callback(null, restaurants) });
+
+  }*/
+
+
 
   /**
    * Fetch a restaurant by its ID.
