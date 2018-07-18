@@ -18,6 +18,40 @@ window.initMap = () => {
       DBHelper.mapMarkerForRestaurant(self.restaurant, self.map);
     }
   });
+
+
+  /** Submit Reviews Code **/
+
+  let form = document.querySelector('#new-review');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let rating = form.querySelector('#rating');
+
+    let review = {
+        restaurant_id: parseInt(getParameterByName('id')),
+        name: form.querySelector('#name').value,
+        rating: rating.options[rating.selectedIndex].value,
+        comments: form.querySelector('#comments').value
+    };
+
+    DBHelper.submitReview(review, (error) => {
+      if (error) {
+        console.log('Error: '+ error);
+      }
+    }).then((data) => {
+      
+      review.createdAt = new Date();
+      review.updatedAt = new Date();
+
+      const ul = document.getElementById('reviews-list');
+      ul.appendChild(createReviewHTML(review));
+
+      form.reset();
+
+    }).catch(error => {
+      console.log(error);
+    });
+  });
 }
 
 /**
@@ -28,7 +62,7 @@ fetchRestaurantFromURL = (callback) => {
     callback(null, self.restaurant)
     return;
   }
-  const id = getParameterByName('id');
+  const id = parseInt(getParameterByName('id'));
   if (!id) { // no id found in URL
     error = 'No restaurant id in URL'
     callback(error, null);
@@ -129,7 +163,7 @@ fillReviewsHTML = (reviews = self.reviews) => {
     const title = document.createElement('h2');
     title.innerHTML = 'Reviews';
     container.appendChild(title);
-    console.log(reviews);
+    //console.log(reviews);
 
     if (!reviews) {
       const noReviews = document.createElement('p');
@@ -179,7 +213,6 @@ createReviewHTML = (review) => {
 
   return li;
 }
-
 
 /**
  * Add restaurant name to the breadcrumb navigation menu

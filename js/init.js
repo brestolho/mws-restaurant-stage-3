@@ -63,3 +63,14 @@
         })
     });
 
+
+    function writeReviewsData(st,data){
+      return dbPromise
+        .then(function (dbObject) {
+            var tx = dbObject.transaction(st , 'readwrite');
+            var store = tx.objectStore(st);
+            store.put(data);
+            return tx.complete;
+        });
+    }
+

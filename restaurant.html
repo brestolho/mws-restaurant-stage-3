@@ -12,7 +12,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
-  <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />
+  <!--<link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />-->
+  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <style>
     body,td,th,p{font-family: Arial, Helvetica, sans-serif;font-size: 10pt;color: #333;line-height: 1.5;}
     body {background-color: #fdfdfd;margin: 0;position:relative;}
@@ -71,10 +72,13 @@
     <!-- End reviews -->
 
     <!-- Start custom reviews -->
-    <section id="Add_review">
-      <h3 tabindex="0">Add Reviews</h3>
-      <form action="" id="reviewForm">
-        <input type="text" placeholder="Type your name" aria-label="Reviewing Username" id="name" required>
+    <section id="new-review-container">
+      <h3 tabindex="0">Add a review</h3>
+      <form action="" id="new-review">
+        
+        <p>
+          <input type="text" id="name" placeholder="Username *" aria-label="Reviewing Username" required />
+        </p>
         <p>
           <label for="rating">Rating</label>
           <select name="rating" id="rating" aria-label="Rating">
@@ -85,8 +89,11 @@
             <option value="5">5</option>
           </select>
         </p>
-        <textarea name="comment" id="comment" aria-label="Review" cols="60" rows="6" placeholder="Write here.."  required></textarea><br>
-        <input id="submit" type="submit" value="Submit Review">
+        <p>
+          <textarea name="comments" id="comments" aria-label="Review" cols="60" rows="6" placeholder="Review.."  required></textarea><br>
+        </p>
+        <input id="submit" type="submit" value="Add Review">
+        
       </form>
     </section>
   

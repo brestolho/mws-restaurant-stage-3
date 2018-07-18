@@ -222,6 +222,36 @@ class DBHelper {
     });
   }
 
+  /** Add Review **/
+
+  static submitReview(data, callback) {
+
+    return fetch( DBHelper.DATABASE_URL + `reviews/`, {
+      body: JSON.stringify(data),
+      headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      },
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => { writeReviewsData('reviews',  data); return data;  }) //
+    .catch(error => {
+      data['updatedAt'] = new Date().getTime();
+      data['createdAt'] = new Date().getTime();
+      
+      //add offline
+      writeReviewsDataOffline('reviewsOffline',data);
+      console.log('Offline...Offline...');
+      console.log('Offline Mode: Review stored in IDB review2');
+
+      callback(error, null);
+      
+    });
+
+  } 
+
+
   /**
    * Fetch reviews by restaurant ID.
    */
