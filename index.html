@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
   <!--<link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.css" />-->
-  <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
+
   <style>
     body,td,th,p{font-family: Arial, Helvetica, sans-serif;font-size: 10pt;color: #333;line-height: 1.5;}
     body {background-color: #fdfdfd;margin: 0;position:relative;}
@@ -29,7 +29,9 @@
     #restaurants-list .restaurant-img {background-color: #ccc;display: block;margin: 0;max-width: 100%;min-height: 208px;min-width: 100%;}
   </style>
   <!--<link rel="stylesheet" href="dist/css/styles.min.css" media="(min-width: 300px)" />-->
-  <link rel="preload" as="style" href="dist/css/styles.min.css" onload="this.rel='stylesheet'">
+  <!--<link rel="preload" as="style" href="dist/css/styles.min.css" onload="this.rel='stylesheet'">-->
+  <link rel="stylesheet" async src="//normalize-css.googlecode.com/svn/trunk/normalize.css" media="all"/>
+  <link rel="stylesheet" async href="dist/css/styles.min.css" media="all">
   <!--
   <link rel="stylesheet" src="//normalize-css.googlecode.com/svn/trunk/normalize.css" />
   <link rel="stylesheet" type="text/css" media="screen and (max-width:549px)" href="css/styles.css">
@@ -68,11 +70,14 @@
     </section>
   </main>
 
-  <script type="application/javascript" charset="utf-8" src="dist/js/idb.min.js"></script>
+  <!--<script type="application/javascript" charset="utf-8" src="dist/js/idb.min.js"></script>
   <script type="application/javascript" charset="utf-8" src="dist/js/init.min.js"></script>
   <script type="application/javascript" charset="utf-8" src="dist/js/dbhelper.min.js"></script>
+  <script type="application/javascript" charset="utf-8" src="dist/js/main.min.js"></script>-->
+  <script type="application/javascript" charset="utf-8" src="dist/js/tools.min.js"></script>
   <script type="application/javascript" charset="utf-8" src="dist/js/main.min.js"></script>
   <script async defer type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC32BslpUZzuiDJ0-oFpM1FSLEttyBtHds&libraries=places&callback=initMap"></script>
+
 
   <footer id="footer">
     Copyright (c) 2017 <a href="/"><strong>Restaurant Reviews</strong></a> All Rights Reserved.

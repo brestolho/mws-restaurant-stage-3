@@ -206,7 +206,7 @@ header h1 a:focus {
   flex-grow: 1;
 }
 
-#restaurants-list li a {
+%btnStyle{
   background-color: #aaa;
   border-bottom: none;
   color: #fff;
@@ -218,13 +218,20 @@ header h1 a:focus {
   text-decoration: none;
   text-transform: uppercase;
   border-radius: 5px;
+  &:hover{
+    background-color: #6290C3;
+  }
+  &:focus{}
 }
-
+#restaurants-list li a {
+  @extend %btnStyle;
+}
+/*
 #restaurants-list li a:hover{
   background-color: #6290C3;
 }
 #restaurants-list li a:focus{
-}
+}*/
 
 
 /* ====================== Restaurant Details ====================== */
@@ -297,7 +304,7 @@ header h1 a:focus {
 
 
 
-#reviews-container {
+#reviews-container, #new-review-container {
   padding: 30px 20px 40px;
 }
 #reviews-container h2 {
@@ -389,6 +396,40 @@ header h1 a:focus {
   background:#ddd;
 }
 
+
+#new-review-container{
+  h3{
+    color: #f58500;
+    font-size: 22pt;
+    font-weight: 300;
+    letter-spacing: -1px;
+    padding-bottom: 1pt;
+  }
+  form{
+    line-height: 20pt;
+    input, textarea{
+      width: calc(100% - 20px);
+      line-height: 24pt;
+      font-size: 12pt;
+      padding: 0 10px;
+      border: 1px solid #ccc;
+    }
+    label,select{
+      line-height: 24pt;
+      font-size: 12pt;
+      margin-right:10px;
+    }
+    textarea{
+      min-height:100px;
+      resize:scroll;
+    }
+    input[type="submit"]{
+      @extend %btnStyle;
+      min-width: 100%;
+    }
+  }
+}
+
 @media screen and (min-width: 500px) {
   header h1 a {
     font-size: 14pt;
@@ -418,14 +459,15 @@ header h1 a:focus {
   .inside #footer {
     width: 50%;
   }
-  #restaurant-container, #reviews-container {
+  #restaurant-container, #reviews-container, #new-review-container {
     padding: 80px 40px;
     width: calc(50% - 80px);
     margin:0;
     margin-top:60px;
   }
-  #reviews-container {
+  #reviews-container, #new-review-container {
     padding: 40px 40px 80px;
     margin-top:0px;
   }
+
 }

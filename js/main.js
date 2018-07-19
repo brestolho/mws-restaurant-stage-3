@@ -10,7 +10,7 @@ var markers = [];
 document.addEventListener('DOMContentLoaded', (event) => {
   
   setTimeout(function() {
-    console.log("load filters");
+    //console.log("load filters");
     fetchNeighborhoods();
     fetchCuisines();
   }, 1000);
@@ -31,7 +31,8 @@ window.initMap = () => {
     center: loc,
     scrollwheel: false
   });
-  console.log("init map");
+
+  //console.log("init map");
   updateRestaurants();
 }
 
@@ -143,7 +144,7 @@ fillCuisinesHTML = (cuisines = self.cuisines) => {
  */
 updateRestaurants = () => {
 
-  console.log("update: create list");
+  //console.log("update: create list");
 
   const cSelect = document.getElementById('cuisines-select');
   const nSelect = document.getElementById('neighborhoods-select');
@@ -158,8 +159,7 @@ updateRestaurants = () => {
     if (error) { // Got an error!
       console.error(error);
     } else {
-      console.log("filtered restaurants - start fill list");
-      console.log(restaurants);
+      //console.log("filtered restaurants - start fill list");
       resetRestaurants(restaurants);
       fillRestaurantsHTML();
     }
@@ -171,7 +171,7 @@ updateRestaurants = () => {
  */
 resetRestaurants = (restaurants) => {
   
-  console.log("reset: clear list");
+  //console.log("reset: clear list");
 
   // Remove all restaurants
   self.restaurants = [];
@@ -190,14 +190,21 @@ resetRestaurants = (restaurants) => {
  */
 fillRestaurantsHTML = (restaurants = self.restaurants) => {
   
-  console.log("create: append items to list");
-
+  //console.log("create: append items to list");
+  
   const ul = document.getElementById('restaurants-list');
-  restaurants.forEach(restaurant => {
-    ul.append(createRestaurantHTML(restaurant));
-  });
-  addMarkersToMap();
-  lazyLoadingImages();
+
+  if(restaurants.length > 0){  
+    restaurants.forEach(restaurant => {
+      ul.append(createRestaurantHTML(restaurant));
+    });
+    addMarkersToMap();
+    lazyLoadingImages();
+  }else{
+    const name = document.createElement('h3');
+    name.innerHTML = "No results was found";
+    ul.append(name);
+  }
 }
 
 /**
@@ -210,9 +217,9 @@ createRestaurantHTML = (restaurant) => {
   image.className = 'restaurant-img lazy';
   image.alt = `${restaurant.name} restaurant, ${restaurant.cuisine_type} cuisine in ${restaurant.neighborhood}`;
   //image.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.src = `img/lazy.png`;//DBHelper.imageUrlForRestaurant{restaurant};
+  image.src = `img/lazy.webp`;//DBHelper.imageUrlForRestaurant{restaurant};
   image.dataset.src = DBHelper.imageUrlForRestaurant(restaurant);
-  image.dataset.srcset = `img/${restaurant.id}_sm.jpg 300w`;
+  image.dataset.srcset = `img/${restaurant.id}_sm.webp 300w`;
   li.append(image);
 
   const name = document.createElement('h3');

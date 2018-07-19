@@ -73,15 +73,16 @@
 
     <!-- Start custom reviews -->
     <section id="new-review-container">
-      <h3 tabindex="0">Add a review</h3>
-      <form action="" id="new-review">
-        
+      
+      <h3>Add a review</h3>
+
+      <form action="#" id="new-review">
         <p>
           <input type="text" id="name" placeholder="Username *" aria-label="Reviewing Username" required />
         </p>
         <p>
           <label for="rating">Rating</label>
-          <select name="rating" id="rating" aria-label="Rating">
+          <select name="rating" id="rating" aria-label="Select rating from 1 to 5">
             <option value="1">1</option>
             <option value="2">2</option>
             <option value="3" selected>3</option>
@@ -90,7 +91,7 @@
           </select>
         </p>
         <p>
-          <textarea name="comments" id="comments" aria-label="Review" cols="60" rows="6" placeholder="Review.."  required></textarea><br>
+          <textarea name="comments" id="comments" aria-label="Write your review for the restaurant" cols="60" rows="6" placeholder="Review.." required></textarea><br>
         </p>
         <input id="submit" type="submit" value="Add Review">
         
@@ -108,11 +109,13 @@
 
   <!-- Beginning scripts -->
   <!-- Database helpers -->
-  <script type="application/javascript" charset="utf-8" src="dist/js/idb.min.js"></script>
+  <!--<script type="application/javascript" charset="utf-8" src="dist/js/idb.min.js"></script>
   <script type="application/javascript" charset="utf-8" src="dist/js/init.min.js"></script>
-  <script type="application/javascript" charset="utf-8" src="dist/js/dbhelper.min.js"></script>
+  <script type="application/javascript" charset="utf-8" src="dist/js/dbhelper.min.js"></script>-->
+
+  <script type="application/javascript" charset="utf-8" src="dist/js/tools.min.js"></script>
   <!-- Main javascript file -->
-  <script type="text/javascript" src="dist/js/restaurant_info.min.js"></script>
+  <script type="text/javascript" charset="utf-8" src="dist/js/restaurant_info.min.js"></script>
   <!-- Google Maps -->
   <script async defer type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC32BslpUZzuiDJ0-oFpM1FSLEttyBtHds&libraries=places&callback=initMap"></script>
   <!-- End scripts -->
